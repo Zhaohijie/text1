@@ -1,0 +1,343 @@
+/*for语句的嵌套*/
+1，对1到n的阶乘求和，代码如下：
+#include <stdio.h>
+
+int main(void){
+    int i, j;
+    int n = 0;
+    int sum = 0;
+    int product;
+    
+    printf("Please input n:")
+    scanf("%d",&n);
+    /*外层循环，阶乘求和*/
+    for(i = 1;i<=n;++i){
+        /*内层循环，求i的阶乘*/
+        for(j = 1;,product = 1;j <= i;++j){
+           product *=j;
+        }
+        sum += product;
+    }
+    printf("sum = %d",sum);
+    return 0;
+ }
+ 2，输出水仙花数。所谓水仙花数，是指一个三位数，其各位数字立方之和等于该数本身。代码如下:
+ #include <stdio.h>
+ int main(void){
+     int a,b,c;
+     int narcissus;
+     printf("Naraissus numbers:\n");
+     for(a = 1;a < 10; ++a){
+         for(b = 0;b < 10; ++b){
+            for(c = 0;c < 10; ++c){
+                narcissus = a * 100 + b * 10 + c;
+                
+                if(a*a*a + b*b*b + c*c*c == narcissus)
+                    printf("%5d",narcissus);
+            }
+         }
+     }
+  printf("\n");
+  
+  return 0;
+  }
+  运行结果为：
+    153  370  371  407
+/*while语句示例*/
+1，求Fibonacci数列
+Fibonacci数列有以下特点，其第一第二项均为1，从第三个数开始，该数是前两个数的和，即：
+                        1                        n = 1
+                F（n）= 1                        n = 2
+                        F(n - 2) + F(N - 1)      n > 2
+求小于n的最大Fibonacci数，代码如下：
+#include <stdio.h>
+
+int main(void){
+    int n = 0;
+    int tmp = 0;
+    int f1 = 1;
+    int f2 = 1;
+    
+    printf("Please input n:");
+    scanf("%d",&n);
+    
+    /*求小于n的最大fibonacci数*/
+    while(f2 < 2){
+        /*f1为上一个fibonacci数，f2为本次得到的fibonacci数*/
+        tmp = f2;
+        f2 = f1 + f2;
+        f1 = tmp;
+    }
+    /*f1为小于n的最大fibonacci数，f2为大于或等于n的最小fibonacci数*/
+    printf("The maximal fibonacci number less than %d is %d.\n",n.f1,);
+    
+    return 0;
+ }
+ 输出结果为：
+           Please input n:14
+           The maximal number less than 14 is 13.
+ 2，求两个整数的最大公约数和最小公倍数，算法步骤如下：
+ （1）对已知的两个整数m和n，使m大于或等于n
+ （2）m除以n得余数r
+ （3）若余数r等于0，则n为求得的最大公约数，算法结束
+ （4）若r不等于0，将n置为r，将m置为n，继续执行第二步
+  在得到m和n的最大公约数后，可以下式得到两者的最小公倍数：最小公倍数=两个整数之积/最大公约数
+  实现代码如下：
+  #include <stdio.h>
+  
+  int main(void){
+  int m,n,r;
+  int product;
+  int tmp;
+  
+  printf("Please input two numbers:\n");
+  scanf("%d %d",m,n);
+  
+  product = m *n;
+  
+  if(m<n){
+      /*交换m和n*/
+      tmp = m;
+      m = n;
+      n = tmp;
+  }
+  
+  /*使用辗转相除法求最大公约数*/
+  r = m % n;
+  while(r! = 0){
+      m = n;
+      n = r;
+      r = m & n;
+  }
+  
+  /*输出结果*/
+  printf("最大公约数为：%d\n",n);
+  printf("最小公倍数为：%d\n",product/n);
+  
+  return 0;
+  }
+  /*do-while语句*/
+  1，输入一个大于70的整数
+  代码如下：
+  #include <stdio.h>
+  
+  int main(void){
+      int n = 0;
+      do{
+          printf("Please input n (>70):");
+          scanf("%d",&n);
+      }while (n <= 70);
+      
+      printf("n = %d\n",n);
+      
+      return 0;
+  }
+  显然像这种情况，用do-while语句更简洁。
+  2，输入7个整数
+  (1）用do-while语句：
+  #include <stdio.h>
+  
+  int main(void){
+      int count = 1;
+      int n = 0;
+      
+      do{
+          printf("Please input number[%d]:",count);
+          scanf("%d",&n);
+          ++count;
+      }while (count < 8);
+      
+      return 0;
+  }
+  （2）用while语句:
+  #include <stdio.h>
+  
+  int main(void){
+      int count = 1;
+      int n = 0;
+      
+      while(count < 8){
+          printf("Please input number [%d]:",count);
+          scanf("%d",&n);
+          ++count;
+      }
+      
+      return 0;
+   }
+  两种实现中，循环体都被执行了7次，但是循环条件判断的执行次数不一样，前者执行了6次，后者执行了7次。
+  /*break语句*/
+  （1）用break语句终止多层循环
+   输入3*3矩阵，并对元素求和，元素必须是正数，实现代码如下：
+   #include <stdio.h>
+   
+   int main(void){
+       int i,j;
+       int data;
+       int sum = 0;
+       
+       const int m = 3;
+       const int n = 3;
+       
+       printf("Please input a %d*%d matrix:\n",i,j);
+       
+       for(i = 0;i < m; ++i)
+           for(j = 0;j < n; ++j)
+               printf("matrix[%d][%d](>0） = ",i ,j );
+               scanf("%d",&data);
+               
+               if(data <= 0){
+                   printf("Error: wrong data!!! Exist inner loop\n");
+                   break;
+               }
+               
+               sum += data;
+           }
+           
+           if(data <= 0){
+               printf("Error: wrong data!!! Exist outer loop\n");
+               break;
+           }
+       }
+       
+       if(i == m && j == n){
+           printf("The sum of numbers in this matrix is %d.\n",sum);
+           
+       return 0;
+   }
+   注意：break语句只能跳出本层循环。若要跳出多层循环，则需要多次调用break语句。
+   /*goto语句*/
+   goto 语句由关键字goto和一个代码中存在的标号名组成。标准形式如下：
+   goto 标号名
+   其执行逻辑为：当程序执行这一句后，将无条件跳转到标号名所在位置，然后执行该位置后面的代码。
+   使用goto语句实现的死循环，示例代码如下：
+   #include <stdio.h>
+   
+   int main(void){
+   infinite_loop:
+       printf("this is an infinite loop!!!\n");
+       goto infinite_loop;
+       
+       return 0;
+   }
+   程序执行后，进入了死循环，反复打印"his is an infinite loop!!!"
+   /*数组*/
+   数组是统一数据类型的许多数据元素按某种顺序排列在一起的集合。
+   （1）使用循环语句给一维数组赋值并打印数组，实现方法如下：
+   #include <stdio.h>
+   #define SIZE 10
+   
+   int main(void){
+       int i = 0;
+       int array[SIZE];
+       
+       for(i = 0;i < SIZE; ++i)
+           array[i] = i;
+           
+       for(i = 0;i <SIZE; ++i)
+           printf("array[%d] = %d",i,array[i]");
+       }
+       return 0;
+    }
+    输出结果为：array[0] = 0
+                array[1] = 1
+                array[2] = 2
+                array[3] = 3
+                array[4] = 4
+                array[5] = 5
+                array[6] = 6
+                array[7] = 7
+                array[8] = 8
+                array[9] = 9
+    (2)一维数组示例
+     在一个无序数组中查找一个数，代码如下：
+ #include <stdio.h>
+ #define SIZE 10
+
+ int main(void){
+    int i;
+    int targrt;
+    
+    int sequence[SIZE] = {3,78,41,2,40,5,33,8,7,24};
+    for(i = 0;i < SIZE; ++i)
+        printf("%-4d",sequance[i]);
+    printf("\nInput the target value: ");
+    scanf("%d",&target);
+
+    for(i = 0;i < SIZE; ++i)
+        if(sequence[i] == target)
+            break;
+    }
+    
+    if(SIZE == i)
+        printf("Can not find %d in this sequence.\n");
+    else
+        printf("%d is the %dth(st/nd) element in this sequance\n",target,i+1);
+
+    return 0;
+ }
+  当输入为4时，结果为Can not find 4 in this sequence.
+  当输入为7时，结果为7 is the 9th(st/nd) element in this sequence.
+   (3)数列排序
+   把无序整数数列按照从大到小的顺序输出。示例代码如下：
+   ①
+   #include <stdio.h>
+   #define SIZE 10
+   
+   int main(void){
+       int i,j;
+       int keyvalue[SIZE] = [0];
+       int maxindex;
+       int tmp;
+       
+       printf("Please input %d intergets:\n",SIZE);
+       
+       for(i = 0;i < SIZE; ++i)
+           scanf("%d",&keyvalue[i]);
+           
+       for(i = 0;i < SIZE - 1; ++i)
+           maxindex = i;
+           
+           for(j = i + 1;j < SIZE; ++j)
+           
+               if(keyvalue[maxindex] < keyvalue[j])
+                   maxindex = j;
+                   
+               if(maxindex! = i){
+               
+                   tmp = keyvalue[maxindex];
+                   keyvalue[maxindex] < keyvalue[i];
+                   keyvalue[i] = tmp;
+               }
+           }
+           printf("Print these intergers in ascending:\n");
+           
+           for(i = 0;i < SIZE; ++i)
+               printf("%-4d",keyvalue[i]");
+               
+           printf("\n");
+           
+           return 0;
+       }
+       ②
+       #include <stdio.h>
+       #define N
+       
+       int main(void){
+           int i,j,t;
+           int array[N];
+           printf("Please input %d intergers",N);
+           for(i = 0;i <= N - 1; i++)
+               scanf("%d",&array[i]);
+           for(i = 0;i <= N - 2; i++){
+               for(j = i + 1;j <= N - 1; j++)
+                   if(array[i] < array[j]){
+                       t = array[i];
+                       array[i] = array[j];
+                       array[j] = t;
+                   }
+           }
+           printf("Print these intergers in ascending:\n");
+           for(i = 0;i <= N - 1; i++)
+               printf("%d",array[i]);
+           return 0;
+        } 
